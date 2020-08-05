@@ -1,0 +1,40 @@
+{
+  "name": "options",
+  "version": "0.0.1",
+  "description": "Manage merge and override option objects",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JazzBrown1/options.git"
+  },
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "scripts": {
+    "test": "npm run build && nyc --reporter=lcov --reporter=text-summary mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "build": "rollup -c"
+  },
+  "author": "Jazz Brown",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-babel": "^5.1.0",
+    "babel-eslint": "^10.0.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "mocha": "^7.2.0",
+    "nyc": "^15.1.0",
+    "rollup": "^1.29.1",
+    "rollup-plugin-babel": "^4.3.3"
+  },
+  "keywords": [
+    "options"
+  ],
+  "dependencies": {
+    "rollup-plugin-cleanup": "^3.1.1"
+  }
+}

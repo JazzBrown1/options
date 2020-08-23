@@ -1,16 +1,14 @@
 import { unknownError, typeError } from './errorMessages';
-import { getType } from './getType';
-
-const parseOption = (option, input) => option.type.includes(getType(input));
+import parseOption from './parseOption';
 
 // first object (input) is not parsed
 const mergeTrusted = (_schema, input = {}, input2 = {}) => {
   const m = (schema, output, overrides, path) => {
     Object.keys(overrides).forEach((key) => {
       if (!schema[key]) throw new Error(unknownError(path, key, schema));
-      if (schema[key].type === 'parent') {
+      if (!schema[key].types) {
         if (!output[key]) output[key] = {};
-        m(schema[key].children, output[key], overrides[key] || {}, [
+        m(schema[key], output[key], overrides[key] || {}, [
           ...path,
           key,
         ]);
@@ -34,4 +32,4 @@ const mergeManyTrusted = function (...args) {
   return current;
 };
 
-export { mergeTrusted, mergeManyTrusted, parseOption };
+export { mergeTrusted, mergeManyTrusted };

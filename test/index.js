@@ -10,7 +10,7 @@ describe('Options()', function () {
   it('Able to create new option object passing valid schema', function () {
     const mySchema = {
       someOption: {
-        type: ['string'],
+        types: ['string'],
         default: 'Some random text',
         cli: {
           name: '',
@@ -18,10 +18,10 @@ describe('Options()', function () {
         }
       },
       someParent: {
-        type: 'parent',
+        types: 'parent',
         children: {
           someNestedOption: {
-            type: ['number'],
+            types: ['number'],
             default: 1,
           },
         },
@@ -33,19 +33,15 @@ describe('Options()', function () {
   it('Able to create new option object passing valid schema', function () {
     const mySchema = {
       someOption: {
-        type: ['string'],
-        default: 'Some random text',
-        cli: {
-          name: '',
-          alias: '',
-        }
+        types: ['string'],
+        default: 'Some random text'
       },
       someParent: {
-        type: 'parent',
+        types: 'parent',
         children: {
           someNestedOption: {
-            type: ['number'],
-            default: 1,
+            types: ['number'],
+            default: 1
           },
         },
       },
@@ -53,16 +49,11 @@ describe('Options()', function () {
 
     const myOptions = new Options(mySchema);
 
-    jsonFile = { someParent: { someNestedOption: 2 } };
-
-    cliInput = { someParent: { someNestedOption: 5 } };
-
-    myOptions.update(jsonFile, cliInput);
+    myOptions.merge(jsonFile);
 
     const someLibraryMethod = (overrides) => {
-      tempOptions = myOptions.copy(overrides);
-      console.log(tempOptions);
-      console.log(myOptions.get());
+      tempOptions = myOptions.copy().merge(overrides);
+      assert.equal(tempOptions.someParent.someNestedOption, 10);
     };
 
     const someOverrides = { someOption: 'test', someParent: { someNestedOption: 10 } };

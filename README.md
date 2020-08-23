@@ -57,15 +57,15 @@ const mySchema = {
 
 const myOptions = new Options(mySchema);
 
-jsonFile = {};
+jsonInput = {someOption: 'foo'};
 
-cliInput = {};
+myOptions.merge(jsonFile);
 
-myOptions.update(jsonFile, cliInput);
-
-someLibraryMethod = (overides) => {
-  tempOptions = myOptions.copy(overides);
-  myOptions.hasDefaults(tempOptions);
+someLibraryMethod = () => {
+  const overrides(someOption: 'bar')
+  const tempOptions = myOptions.copy().merge(overrides);
+  console.log(myOptions.someOption) // foo
+  console.log(tempOptions.someOption) // bar
 };
 ```
 

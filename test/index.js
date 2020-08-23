@@ -12,18 +12,11 @@ describe('Options()', function () {
       someOption: {
         types: ['string'],
         default: 'Some random text',
-        cli: {
-          name: '',
-          alias: '',
-        }
       },
       someParent: {
-        types: 'parent',
-        children: {
-          someNestedOption: {
-            types: ['number'],
-            default: 1,
-          },
+        someNestedOption: {
+          types: ['number'],
+          default: 1,
         },
       },
     };
@@ -32,24 +25,20 @@ describe('Options()', function () {
   });
   it('Able to create new option object passing valid schema', function () {
     const mySchema = {
+
       someOption: {
         types: ['string'],
-        default: 'Some random text'
+        default: 'Some random text',
       },
       someParent: {
-        types: 'parent',
-        children: {
-          someNestedOption: {
-            types: ['number'],
-            default: 1
-          },
+        someNestedOption: {
+          types: ['number'],
+          default: 1,
         },
       },
     };
 
     const myOptions = new Options(mySchema);
-
-    myOptions.merge(jsonFile);
 
     const someLibraryMethod = (overrides) => {
       tempOptions = myOptions.copy().merge(overrides);

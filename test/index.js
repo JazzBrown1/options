@@ -6,15 +6,21 @@
 var assert = require('assert');
 var Options = require('../dist/main');
 
+const _parent = true; const
+  _property = true;
+
 describe('Options()', function () {
   it('Able to create new option object passing valid schema', function () {
     const mySchema = {
       someOption: {
+        _property,
         types: ['string'],
         default: 'Some random text',
       },
       someParent: {
+        _parent,
         someNestedOption: {
+          _property,
           types: ['number'],
           default: 1,
         },
@@ -27,11 +33,14 @@ describe('Options()', function () {
     const mySchema = {
 
       someOption: {
+        _property,
         types: ['string'],
         default: 'Some random text',
       },
       someParent: {
+        _parent,
         someNestedOption: {
+          _property,
           types: ['number'],
           default: 1,
         },

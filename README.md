@@ -27,45 +27,48 @@ npm install options
 Cjs
 
 ```
-const options = require('options');
+const Options = require('options');
 ```
 
 Es Module
 
 ```
-import options from 'options';
+import Options from 'options';
 ```
 
 ### Example
 
 ```
-const mySchema = {
+const _parent = true;
+  _property = true;
+
+const schema = {
   someOption: {
-    type: ["text"],
+    _property,
+    types: ["text"],
     default: "Some random text",
   },
   someParent: {
-    type: "parent",
-    children: {
-      someNestedOption: {
-        type: ["number"],
-        default: 1,
-      },
+    _parent
+    someNestedOption: {
+      _property,
+      types: ["number"],
+      default: 1,
     },
   },
 };
 
-const myOptions = new Options(mySchema);
+const options = new Options(schema);
 
-jsonInput = {someOption: 'foo'};
+const userOptions = {someOption: 'foo'};
 
-myOptions.merge(jsonFile);
+options.merge(userOptions);
 
-someLibraryMethod = () => {
-  const overrides(someOption: 'bar')
-  const tempOptions = myOptions.copy().merge(overrides);
-  console.log(myOptions.someOption) // foo
-  console.log(tempOptions.someOption) // bar
+const someLibraryMethod = () => {
+  const overrides = { someOption: 'bar' };
+  const temp = options.copy().merge(overrides);
+  console.log(options.someOption) // foo
+  console.log(temp.someOption) // bar
 };
 ```
 

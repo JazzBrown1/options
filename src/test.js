@@ -1,50 +1,61 @@
 const Options = require('../dist/main');
 
+const _parent = true;
+const _property = _parent;
+
 const mySchema = {
-  someOption: {
-    types: ['string'],
+  cliOption: {
+    _property,
     default: 'Some random text',
-    type: String,
-    name: 'some-option'
+    types: ['number'],
+    parser: (input) => typeof input === 'string',
+    cli: {
+      name: 'cli-option',
+      type: String,
+      alias: 'c'
+    }
   },
   someParent: {
+    _parent,
     cliOption: {
+      _property,
       types: ['string'],
       default: 'Some random text',
-      type: String,
-      name: 'cli-option'
+      cli: {
+        type: String,
+        name: 'nested-cli-option',
+        alias: 'n'
+      }
     },
   },
 };
 
-console.log(Array(1));
+try {
+  const options = new Options(mySchema);
+} catch (err) {
+  console.log('test', err instanceof Error);
+  throw err;
+}
 
-const options = new Options(mySchema);
+const [claDefinitions, inflate] = options.flat(({ cli }) => [cli.name, cli]);
 
-const claDefinitions = options.flat((key, data) => [data.name, data]);
+const inflated = inflate({ 'cli-option': 'my test', 'nested-cli-option': 'my test' });
 
 console.log('definitions', claDefinitions);
-const inflated = options.inflate({ 'cli-option': 'myyyyy test' });
 console.log('inflated', inflated);
-options.merge(inflated);
-console.log(options);
-
-// const claArguments = options.inflate(commandLineArguments(claDefinitions));
-
-// options.merge(claArguments);
 
 const update = {
-  someOption: 'new'
+  cliOption: 'haha'
 };
 
-options.merge(update);
+options.merge(inflated, update);
 
 console.log(options);
 
 const opsCopy = options.copy();
 
 const update2 = {
-  someOption: 'copy'
+  cliOption: 'copy'
 };
 
 opsCopy.merge(update2);

@@ -1,0 +1,25 @@
+const defaultMap = (el, key, path) => {
+  const name = el.name || path.join('>');
+  return [name, { ...el, name }];
+};
+
+const flatMap = (_schema, mapFunc = defaultMap) => {
+  const f = (schema, path, output, flatRef) => {
+    Object.keys(schema).forEach((key) => {
+      if (key === '_parent' || key === '_property') return;
+      const option = schema[key];
+      const newPath = [...path, key];
+      if (option._parent) {
+        f(option, newPath, output, flatRef);
+      } else {
+        const [name, el] = mapFunc(option, key, newPath);
+        output.push(el);
+        flatRef[name] = newPath;
+      }
+    });
+    return [output, flatRef];
+  };
+  return f(_schema, [], [], {});
+};
+
+export default flatMap;

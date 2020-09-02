@@ -33,7 +33,7 @@
     "rollup-plugin-cleanup": "^3.1.1"
   },
   "keywords": [
-    "options"
+    "options", "config"
   ],
   "dependencies": {}
 }

@@ -60,7 +60,7 @@ const schema = {
 
 const options = new Options(schema);
 
-const userOptions = {rootLevelOption: 'foo'};
+const userOptions = { rootLevelOption: 'foo' };
 
 options.merge(userOptions);
 

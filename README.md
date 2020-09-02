@@ -39,20 +39,20 @@ import Options from 'options';
 ### Example
 
 ```
-const _parent = true;
+const _parent = true,
   _property = true;
 
 const schema = {
-  someOption: {
+  rootLevelOption: {
     _property,
-    types: ["text"],
-    default: "Some random text",
+    types: ['string'],
+    default: 'Some random text',
   },
   someParent: {
-    _parent
-    someNestedOption: {
+    _parent,
+    nestedOption: {
       _property,
-      types: ["number"],
+      types: ['number'],
       default: 1,
     },
   },
@@ -60,15 +60,15 @@ const schema = {
 
 const options = new Options(schema);
 
-const userOptions = {someOption: 'foo'};
+const userOptions = {rootLevelOption: 'foo'};
 
 options.merge(userOptions);
 
 const someLibraryMethod = () => {
-  const overrides = { someOption: 'bar' };
+  const overrides = { rootLevelOption: 'bar' };
   const temp = options.copy().merge(overrides);
-  console.log(options.someOption) // foo
-  console.log(temp.someOption) // bar
+  console.log(options.rootLevelOption) // foo
+  console.log(temp.rootLevelOption) // bar
 };
 ```
 

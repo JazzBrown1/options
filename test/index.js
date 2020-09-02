@@ -27,6 +27,7 @@ describe('Options()', function () {
       },
     };
 
+    // eslint-disable-next-line no-unused-vars
     const myOptions = new Options(mySchema);
   });
   it('Able to create new option object passing valid schema', function () {

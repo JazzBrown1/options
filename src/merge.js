@@ -16,7 +16,7 @@ const mergeCore = (_schema, input = {}, input2 = {}) => {
         if (!output[key]) output[key] = {};
         if (!isObj(value)) throw new InvalidParentTypeError(value, newPath);
         m(option, output[key], value || {}, newPath);
-      } else if (value) {
+      } else if (option._property) {
         parseOption(option, value, newPath);
         output[key] = value;
       }

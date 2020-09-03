@@ -1,6 +1,6 @@
 {
   "name": "ez-options",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Manage merge and override option objects",
   "repository": {
     "type": "git",

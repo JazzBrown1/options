@@ -27,10 +27,6 @@ PropertyParsingError.prototype = Object.create(Error.prototype, {
   }
 });
 
-if (Object.setPrototypeOf) {
-  Object.setPrototypeOf(PropertyParsingError, Error);
-} else {
-  // eslint-disable-next-line no-proto
-  PropertyParsingError.__proto__ = Error;
-}
+Object.setPrototypeOf(PropertyParsingError, Error);
+
 export default PropertyParsingError;

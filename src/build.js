@@ -22,7 +22,7 @@ const build = (_schema) => {
       output, required
     };
   };
-  return b(_schema, {}, ['ROOT'], []);
+  return b(_schema, {}, ['[Options]'], []);
 };
 
 export default build;

@@ -21,10 +21,6 @@ UnknownPropertyError.prototype = Object.create(Error.prototype, {
   }
 });
 
-if (Object.setPrototypeOf) {
-  Object.setPrototypeOf(UnknownPropertyError, Error);
-} else {
-  // eslint-disable-next-line no-proto
-  UnknownPropertyError.__proto__ = Error;
-}
+Object.setPrototypeOf(UnknownPropertyError, Error);
+
 export default UnknownPropertyError;

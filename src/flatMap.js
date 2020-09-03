@@ -12,7 +12,9 @@ const flatMap = (_schema, mapFunc = defaultMap) => {
       if (option._parent) {
         f(option, newPath, output, flatRef);
       } else {
-        const [name, el] = mapFunc(option, key, newPath);
+        const result = mapFunc(option, key, newPath);
+        if (!result) return;
+        const [name, el] = result;
         output.push(el);
         flatRef[name] = newPath;
       }

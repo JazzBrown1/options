@@ -11,7 +11,7 @@ const mergeCore = (_schema, input = {}, input2 = {}) => {
       const value = overrides[key];
       const option = schema[key];
       const newPath = [...path, key];
-      if (!option) throw new UnknownPropertyError(value, path);
+      if (!option) throw new UnknownPropertyError(value, newPath);
       if (option._parent) {
         if (!output[key]) output[key] = {};
         if (!isObj(value)) throw new InvalidParentTypeError(value, newPath);

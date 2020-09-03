@@ -25,10 +25,6 @@ InvalidParentTypeError.prototype = Object.create(Error.prototype, {
   }
 });
 
-if (Object.setPrototypeOf) {
-  Object.setPrototypeOf(InvalidParentTypeError, Error);
-} else {
-  // eslint-disable-next-line no-proto
-  InvalidParentTypeError.__proto__ = Error;
-}
+Object.setPrototypeOf(InvalidParentTypeError, Error);
+
 export default InvalidParentTypeError;

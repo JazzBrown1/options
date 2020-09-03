@@ -11,27 +11,29 @@ const _parent = true; const
 
 describe('Options()', function () {
   it('Able to create new option object passing valid schema', function () {
-    const mySchema = {
+    const text = 'Some random text';
+    const num = 1;
+    const schema = {
       someOption: {
         _property,
         types: ['string'],
-        default: 'Some random text',
+        default: text,
       },
       someParent: {
         _parent,
         someNestedOption: {
           _property,
           types: ['number'],
-          default: 1,
+          default: num,
         },
       },
     };
-
-    // eslint-disable-next-line no-unused-vars
-    const myOptions = new Options(mySchema);
+    const options = new Options(schema);
+    assert.equal(options.someOption, text);
+    assert.equal(options.someParent.someNestedOption, num);
   });
-  it('Able to create new option object passing valid schema', function () {
-    const mySchema = {
+  it('Able to copy options and merge without effecting orginal object', function () {
+    const schema = {
 
       someOption: {
         _property,
@@ -48,14 +50,24 @@ describe('Options()', function () {
       },
     };
 
-    const myOptions = new Options(mySchema);
+    const options = new Options(schema);
 
-    const someLibraryMethod = (overrides) => {
-      tempOptions = myOptions.copy().merge(overrides);
-      assert.equal(tempOptions.someParent.someNestedOption, 10);
+    const overrides = { someOption: 'test', someParent: { someNestedOption: 10 } };
+    const tempOptions = options.copy().merge(overrides);
+    assert.equal(options.someParent.someNestedOption, 1);
+    assert.equal(tempOptions.someParent.someNestedOption, 10);
+  });
+  it('Able merge over option with a falsy value', function () {
+    const schema = {
+      test: {
+        _property,
+        types: ['boolean'],
+        default: true,
+      }
     };
 
-    const someOverrides = { someOption: 'test', someParent: { someNestedOption: 10 } };
-    someLibraryMethod(someOverrides);
+    const options = new Options(schema);
+    options.merge({ test: false });
+    assert.equal(options.test, false);
   });
 });

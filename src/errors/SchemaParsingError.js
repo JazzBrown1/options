@@ -21,10 +21,6 @@ SchemaParsingError.prototype = Object.create(Error.prototype, {
   }
 });
 
-if (Object.setPrototypeOf) {
-  Object.setPrototypeOf(SchemaParsingError, Error);
-} else {
-  // eslint-disable-next-line no-proto
-  SchemaParsingError.__proto__ = Error;
-}
+Object.setPrototypeOf(SchemaParsingError, Error);
+
 export default SchemaParsingError;

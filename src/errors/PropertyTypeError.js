@@ -27,10 +27,6 @@ PropertyTypeError.prototype = Object.create(Error.prototype, {
   }
 });
 
-if (Object.setPrototypeOf) {
-  Object.setPrototypeOf(PropertyTypeError, Error);
-} else {
-  // eslint-disable-next-line no-proto
-  PropertyTypeError.__proto__ = Error;
-}
+Object.setPrototypeOf(PropertyTypeError, Error);
+
 export default PropertyTypeError;

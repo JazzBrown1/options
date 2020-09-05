@@ -1,13 +1,12 @@
-# Options
+# EZ-Options
 
-Manage, parse update and merge option objects
+Complex Options Objects made easy.
 
 ### Table of contents
 
 1. [ Installation](#Install)
 2. [ Usage](#usage)
-3. [ Workflow](#workflow)
-4. [ Report Bug](#bugs)
+3. [ Report Bug](#bugs)
 
 <a name="Install"></a>
 
@@ -38,15 +37,15 @@ import Options from 'options';
 
 ### Example
 
-```
+```javascript
 const _parent = true,
   _property = true;
 
 const schema = {
   rootLevelOption: {
     _property,
-    types: ['string'],
-    default: 'Some random text',
+    enum: ['default', 'foo', 'bar'],
+    default: 'default',
   },
   someParent: {
     _parent,
@@ -67,8 +66,8 @@ options.merge(userOptions);
 const someLibraryMethod = () => {
   const overrides = { rootLevelOption: 'bar' };
   const temp = options.copy().merge(overrides);
-  console.log(options.rootLevelOption) // foo
-  console.log(temp.rootLevelOption) // bar
+  console.log(options.rootLevelOption); // foo
+  console.log(temp.rootLevelOption); // bar
 };
 ```
 

@@ -13,7 +13,7 @@ const mergeCore = (_schema, input = {}, input2 = {}) => {
       const newPath = [...path, key];
       if (!option) throw new UnknownPropertyError(value, newPath);
       if (option._parent) {
-        if (!output[key]) output[key] = {};
+        // if (!output[key]) output[key] = {}; // Currently redundant
         if (!isObj(value)) throw new InvalidParentTypeError(value, newPath);
         m(option, output[key], value || {}, newPath);
       } else if (option._property) {
@@ -23,7 +23,7 @@ const mergeCore = (_schema, input = {}, input2 = {}) => {
     });
     return output;
   };
-  return m(_schema, input, input2, ['ROOT']);
+  return m(_schema, input, input2, ['[Options]']);
 };
 
 const merge = function (...args) {

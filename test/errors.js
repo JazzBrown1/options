@@ -155,6 +155,23 @@ describe('Errors', function () {
           done();
         }
       });
+      it('Throws error if value not in enum list', function (done) {
+        const schema = {
+          option: {
+            _property,
+            enum: ['foo'],
+            default: 'foo'
+          },
+
+        };
+        const options = new Options(schema);
+        try {
+          options.merge({ option: 'bar' });
+        } catch (err) {
+          assert.equal(err.name, 'EnumError');
+          done();
+        }
+      });
     });
   });
 });

@@ -1,22 +1,24 @@
 import { getType } from '../getType';
 
-function PropertyParsingError(option, value, path) {
+function EnumError(option, value, path) {
   const inputType = getType(value);
-  const message = `Failed to parse property ${path.join('.')}`;
+  const expectedValues = option.enum;
+  const message = `Failed to parse property ${path.join('.')}, must be one of the following values ${option.enum.toString()}`;
   const instance = new Error(message);
-  instance.name = 'PropertyParsingError';
+  instance.name = 'EnumError';
   instance.propertyKey = path[path.length - 1];
   instance.propertyPath = path;
   instance.inputType = inputType;
   instance.inputValue = value;
+  instance.expectedValues = expectedValues;
   Object.setPrototypeOf(instance, Object.getPrototypeOf(this));
   if (Error.captureStackTrace) {
-    Error.captureStackTrace(instance, PropertyParsingError);
+    Error.captureStackTrace(instance, EnumError);
   }
   return instance;
 }
 
-PropertyParsingError.prototype = Object.create(Error.prototype, {
+EnumError.prototype = Object.create(Error.prototype, {
   constructor: {
     value: Error,
     enumerable: false,
@@ -25,6 +27,6 @@ PropertyParsingError.prototype = Object.create(Error.prototype, {
   }
 });
 
-Object.setPrototypeOf(PropertyParsingError, Error);
+Object.setPrototypeOf(EnumError, Error);
 
-export default PropertyParsingError;
+export default EnumError;

@@ -60,7 +60,8 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          assert.equal(err.name, 'PropertyTypeError');
+          console.log(err);
+          assert.equal(err.name, 'SchemaParsingError');
           done();
         }
       });
@@ -80,7 +81,7 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          assert.equal(err.name, 'PropertyParsingError');
+          assert.equal(err.name, 'SchemaParsingError');
           done();
         }
       });

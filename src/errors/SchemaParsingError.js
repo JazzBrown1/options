@@ -1,5 +1,5 @@
-function SchemaParsingError(value, path) {
-  const message = `Unable to parse schema object ${path.join('.')} should be an Object that contains a _parent or _property prop`;
+function SchemaParsingError(value, path, msg = 'Should be an Object that contains a _parent or _property prop') {
+  const message = `Unable to parse schema object ${path.join('.')}: ${msg}`;
   const instance = new Error(message);
   instance.name = 'SchemaParsingError';
   instance.propertyKey = path[path.length - 1];

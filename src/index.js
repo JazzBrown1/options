@@ -3,23 +3,24 @@ import build from './build';
 import flatMap from './flatMap';
 import inflate from './inflate';
 
-const Options = function (schema) {
-  const {
-    output, required
-  } = build(schema);
-  Object.assign(this, output);
+const Options = function (schema, ops = {}) {
+  const required = build(schema, ops.dieHard, this);
+  // Object.assign(this, output);
   Object.defineProperty(this, '__schema', {
     enumerable: false,
     value: schema
   });
-  Object.defineProperty(this, '__required', {
+  Object.defineProperty(this, '__private', {
     enumerable: false,
-    value: required
+    value: {
+      required,
+      dieHard: ops.dieHard
+    }
   });
 };
 
-Options.prototype.merge = function (...args) {
-  merge(this.__schema, this, ...args);
+Options.prototype.merge = function (...input) {
+  merge(this.__schema, this.__private.dieHard, this, input);
   return this;
 };
 

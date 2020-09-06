@@ -4,34 +4,31 @@ import UnknownPropertyError from './errors/UnknownPropertyError';
 import InvalidParentTypeError from './errors/InvalidParentTypeError';
 
 // first object (input) is not parsed
-const mergeCore = (_schema, input = {}, input2 = {}) => {
-  if (!isObj(input2)) throw new TypeError('options.merge() input must be an object');
-  const m = (schema, output, overrides, path) => {
-    Object.keys(overrides).forEach((key) => {
-      const value = overrides[key];
+const mergeCore = (_schema, _current = {}, _input = {}, dieHard) => {
+  if (!dieHard && !isObj(_input)) throw new TypeError('options.merge() input must be an object');
+  const m = (schema, current, input, path) => {
+    Object.keys(input).forEach((key) => {
+      const value = input[key];
       const option = schema[key];
       const newPath = [...path, key];
       if (!option) throw new UnknownPropertyError(value, newPath);
       if (option._parent) {
-        // if (!output[key]) output[key] = {}; // Currently redundant
-        if (!isObj(value)) throw new InvalidParentTypeError(value, newPath);
-        m(option, output[key], value || {}, newPath);
+        // if (!current[key]) current[key] = {}; // Currently redundant
+        if (!dieHard && !isObj(value)) throw new InvalidParentTypeError(value, newPath);
+        m(option, current[key], value || {}, newPath);
       } else if (option._property) {
-        parseOption(option, value, newPath);
-        output[key] = value;
+        if (!dieHard) parseOption(option, value, newPath);
+        current[key] = value;
       }
     });
-    return output;
+    return current;
   };
-  return m(_schema, input, input2, ['[Options]']);
+  return m(_schema, _current, _input, ['[Options]']);
 };
 
-const merge = function (...args) {
-  const objs = [...args];
-  const schema = objs.shift();
-  const current = objs.shift();
-  objs.forEach((obj) => {
-    mergeCore(schema, current, obj);
+const merge = function (schema, dieHard, current, inputs) {
+  inputs.forEach((input) => {
+    mergeCore(schema, current, input, dieHard);
   });
   return current;
 };

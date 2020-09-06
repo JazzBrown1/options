@@ -19,4 +19,15 @@ const inflate = (ref) => (input) => {
   return obj;
 };
 
+const inflateToMany = (ref) => (input) => {
+  const obj = {};
+  Object.entries(input).forEach(([key, val]) => {
+    const paths = ref[key];
+    if (!paths) return;
+    paths.forEach((path) => add(path, obj, val));
+  });
+  return obj;
+};
+
+export { inflate, inflateToMany };
 export default inflate;

@@ -1,10 +1,10 @@
 import merge from './merge';
 import build from './build';
-import flatMap from './flatMap';
-import inflate from './inflate';
+import { flatMap } from './flatMap';
+import { inflate } from './inflate';
 
 const Options = function (schema, ops = {}) {
-  const required = build(schema, ops.dieHard, this);
+  const required = build(schema, ops.dieHard || ops.dieHardBuild, this);
   // Object.assign(this, output);
   Object.defineProperty(this, '__schema', {
     enumerable: false,

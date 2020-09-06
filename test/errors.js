@@ -60,7 +60,6 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          console.log(err);
           assert.equal(err.name, 'SchemaParsingError');
           done();
         }

@@ -2,12 +2,12 @@
 
 Complex Options Objects made easy with input checking and meaningful errors.
 
-![NPM](https://img.shields.io/github/last-commit/JazzBrown1/options)
-![NPM](https://img.shields.io/npm/v/ez-options)
+![Travis (.com)](https://img.shields.io/travis/com/JazzBrown1/options)
+![Coveralls github branch](https://img.shields.io/coveralls/github/JazzBrown1/options/master)
 ![NPM](https://img.shields.io/npm/l/ez-options)
-![NPM](https://img.shields.io/bundlephobia/min/ez-options)
-![NPM](https://img.shields.io/travis/com/JazzBrown1/options/master)
-![NPM](https://img.shields.io/coveralls/github/JazzBrown1/options/master)
+![npm](https://img.shields.io/npm/v/ez-options)
+![GitHub last commit](https://img.shields.io/github/last-commit/JazzBrown1/options)
+![npm bundle size](https://img.shields.io/bundlephobia/min/ez-options)
 
 ### Table of contents
 

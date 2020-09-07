@@ -1,3 +1,6 @@
+/* eslint-disable consistent-return */
+/* eslint-disable default-case */
+
 import { getType } from '../getType';
 
 export default (option, input, path, type) => {
@@ -26,6 +29,5 @@ export default (option, input, path, type) => {
       return `Unable to parse schema object ${path.join('.')}, enum should be of type: array but is of type ${getType(option.enum)}`;
     case 'SchemaDefault':
       return `Unable to parse schema object ${path.join('.')}, the default value does not parse`;
-    default: throw new Error('This should never happen');
   }
 };

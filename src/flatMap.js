@@ -1,5 +1,7 @@
+import { inflate } from './inflate';
+
 const defaultMap = (el, key, path) => {
-  const name = el.name || path.join('>');
+  const name = el.name || path.join('_');
   return [name, { ...el, name }];
 };
 
@@ -19,7 +21,7 @@ const flatMap = (_schema, mapFunc = defaultMap) => {
         flatRef[name] = newPath;
       }
     });
-    return [output, flatRef];
+    return [output, inflate(flatRef)];
   };
   return f(_schema, [], [], {});
 };
@@ -43,7 +45,7 @@ const flatMapToMany = (_schema, mapFunc = defaultMap) => {
         flatRef[name].push(newPath);
       }
     });
-    return [output, flatRef];
+    return [output, inflate(flatRef)];
   };
   return f(_schema, [], [], {});
 };

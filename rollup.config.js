@@ -14,6 +14,7 @@ export default [
         format: 'cjs',
         name: 'options',
         esModule: false,
+        preferConst: true
       }
     ]
   },
@@ -24,7 +25,7 @@ export default [
     ],
     output: [
       {
-        file: './dist/options.min.js',
+        file: './dist/ez-options.min.js',
         format: 'cjs',
         name: 'options',
         esModule: false,

@@ -60,7 +60,6 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          console.log(err);
           assert.equal(err.type, 'SchemaDefault');
           done();
         }
@@ -82,6 +81,51 @@ describe('Errors', function () {
           const options = new Options(schema);
         } catch (err) {
           assert.equal(err.type, 'SchemaDefault');
+          done();
+        }
+      });
+      it('Throws error if non object passed as schema', function (done) {
+        try {
+          // eslint-disable-next-line no-unused-vars
+          const options = new Options(null);
+        } catch (err) {
+          assert.equal(err.type, 'BuildType');
+          done();
+        }
+      });
+      it('Throws error if non function passed as parser', function (done) {
+        try {
+          // eslint-disable-next-line no-unused-vars
+          const options = new Options({ option: { _property, parser: 'err' } });
+        } catch (err) {
+          assert.equal(err.type, 'SchemaParser');
+          done();
+        }
+      });
+      it('Throws error if non array passed as enum', function (done) {
+        try {
+          // eslint-disable-next-line no-unused-vars
+          const options = new Options({ option: { _property, enum: 'err' } });
+        } catch (err) {
+          assert.equal(err.type, 'SchemaEnum');
+          done();
+        }
+      });
+      it('Throws error if non array passed as types', function (done) {
+        try {
+          // eslint-disable-next-line no-unused-vars
+          const options = new Options({ option: { _property, types: 'err' } });
+        } catch (err) {
+          assert.equal(err.type, 'SchemaTypes');
+          done();
+        }
+      });
+      it('Throws error if non object is parent child', function (done) {
+        try {
+          // eslint-disable-next-line no-unused-vars
+          const options = new Options({ option: 'throws error' });
+        } catch (err) {
+          assert.equal(err.type, 'SchemaObject');
           done();
         }
       });
@@ -170,6 +214,16 @@ describe('Errors', function () {
           options.merge({ option: 'bar' });
         } catch (err) {
           assert.equal(err.type, 'PropEnum');
+          done();
+        }
+      });
+      it('Throws error if non object passed for merge', function (done) {
+        const options = new Options({ option: { _property, default: 'default' } });
+        try {
+          // eslint-disable-next-line no-unused-vars
+          options.merge(['Should cause Error']);
+        } catch (err) {
+          assert.equal(err.type, 'MergeType');
           done();
         }
       });

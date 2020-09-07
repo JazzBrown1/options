@@ -57,6 +57,32 @@ describe('Options()', function () {
     assert.equal(options.someParent.someNestedOption, 1);
     assert.equal(tempOptions.someParent.someNestedOption, 10);
   });
+  it('Copies config to copy', function () {
+    const schema = {
+
+      someOption: {
+        _property,
+        types: ['string'],
+        default: 'Some random text',
+      },
+      propWithNoDefault: {
+        _property
+      },
+      someParent: {
+        _parent,
+        someNestedOption: {
+          _property,
+          types: ['number'],
+          default: 1,
+        },
+      },
+    };
+
+    const options = new Options(schema, { dieHardMerge: true });
+    // eslint-disable-next-line no-unused-vars
+    const tempOptions = options.copy().merge();
+    assert.equal(options.__private.dieHardMerge, true);
+  });
   it('Able merge over option with a falsy value', function () {
     const schema = {
       test: {

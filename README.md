@@ -2,6 +2,13 @@
 
 Complex Options Objects made easy.
 
+![NPM](https://img.shields.io/github/last-commit/JazzBrown1/options)
+![NPM](https://img.shields.io/npm/v/ez-options)
+![NPM](https://img.shields.io/npm/l/ez-options)
+![NPM](https://img.shields.io/bundlephobia/min/ez-options)
+![NPM](https://img.shields.io/travis/com/JazzBrown1/options/master)
+![NPM](https://img.shields.io/coveralls/github/JazzBrown1/options/master)
+
 ### Table of contents
 
 1. [ Installation](#Install)
@@ -78,7 +85,9 @@ class Person {
 const john = new Person('John', 'Smith', { case: { upper: true } });
 console.log(john.getName()); // 'JOHN SMITH'
 console.log(john.getName({ reverse: true })); // 'SMITH JOHN'
-console.log(john.getName({ reverse: true, separator: ', ', case: { upper: false } })); // 'Smith, John'
+console.log(john.getName({
+  reverse: true, separator: ', ', case: { upper: false }
+})); // 'Smith, John'
 ```
 - Integration commandLineArgs lib
 
@@ -87,22 +96,26 @@ const schema = {
   server: {
     _parent,
     compress: {
-      _property, default: true, types: ['boolean'], cla: { name: 'compress', type: Boolean, alias: 'c' }
+      _property, default: true, types: ['boolean'],
+      cla: { name: 'compress', type: Boolean, alias: 'c' }
     },
     skip: {
-      _property, default: false, types: ['boolean'], cla: { name: 'skip-server', type: Boolean, alias: 's' }
+      _property, default: false, types: ['boolean'],
+      cla: { name: 'skip-server', type: Boolean, alias: 's' }
     },
   },
   react: {
     _parent,
     skip: {
-      _property, default: false, types: ['boolean'], cla: { name: 'skip-react', type: Boolean, alias: 'r' }
+      _property, default: false, types: ['boolean'],
+      cla: { name: 'skip-react', type: Boolean, alias: 'r' }
     }
   },
   output: {
     _parent,
     directory: {
-      _property, default: 'clasp', types: ['string'], cla: { name: 'output-directory', type: String, alias: 'o' }
+      _property, default: 'clasp', types: ['string'],
+      cla: { name: 'output-directory', type: String, alias: 'o' }
     }
   }
 };
@@ -110,9 +123,11 @@ const schema = {
 const options = new Options(schema);
 // Get the config.json object
 const config = await getConfigJson();
-// Extract the cla information into a flat array for commandLineArgs and an inflate function
+// Extract the cla information into a flat array for commandLineArgs
+// and an inflate function
 const [claDefs, inflate] = options.flat((el) => [el.cla.name, el.cla]);
-// Pass the extracted information to the commandLineArgs lib to get the command input options
+// Pass the extracted information to the commandLineArgs lib to get
+// the command input options
 const claFlat = commandLineArgs(claDefs);
 // Inflate the flat object to the options object format
 const claInflated = inflate(claFlat);

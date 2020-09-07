@@ -12,9 +12,8 @@ function OptionsError(option, input, path, type) {
   instance.inputValue = input;
   instance.schemaDefinition = option || 'n/a';
   Object.setPrototypeOf(instance, Object.getPrototypeOf(this));
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(instance, OptionsError);
-  }
+  /* istanbul ignore next */
+  Error.captureStackTrace(instance, OptionsError);
   return instance;
 }
 

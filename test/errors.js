@@ -64,7 +64,7 @@ describe('Errors', function () {
           done();
         }
       });
-      it('Throws error if parser fails to parse prop', function (done) {
+      it('Throws error if checker fails to parse prop', function (done) {
         const schema = {
           parent: {
             _parent,
@@ -72,7 +72,7 @@ describe('Errors', function () {
               _property,
               types: ['string'],
               default: 'text',
-              parser: () => false
+              checker: () => false
             },
           }
         };
@@ -93,12 +93,12 @@ describe('Errors', function () {
           done();
         }
       });
-      it('Throws error if non function passed as parser', function (done) {
+      it('Throws error if non function passed as checker', function (done) {
         try {
           // eslint-disable-next-line no-unused-vars
-          const options = new Options({ option: { _property, parser: 'err' } });
+          const options = new Options({ option: { _property, checker: 'err' } });
         } catch (err) {
-          assert.equal(err.type, 'SchemaParser');
+          assert.equal(err.type, 'SchemaChecker');
           done();
         }
       });
@@ -182,13 +182,13 @@ describe('Errors', function () {
           done();
         }
       });
-      it('Throws error if parser fails to parse prop', function (done) {
+      it('Throws error if checker fails to parse prop', function (done) {
         const schema = {
           option: {
             _property,
             types: ['string'],
             default: 'text',
-            parser: (val) => val === 'text'
+            checker: (val) => val === 'text'
           },
 
         };
@@ -196,7 +196,7 @@ describe('Errors', function () {
         try {
           options.merge({ option: 'wont parse' });
         } catch (err) {
-          assert.equal(err.type, 'PropParser');
+          assert.equal(err.type, 'PropChecker');
           done();
         }
       });

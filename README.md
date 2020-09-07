@@ -1,6 +1,6 @@
 # EZ-Options
 
-Complex Options Objects made easy.
+Complex Options Objects made easy with built input checking and meaningful detailed Errors.
 
 ![NPM](https://img.shields.io/github/last-commit/JazzBrown1/options)
 ![NPM](https://img.shields.io/npm/v/ez-options)
@@ -134,6 +134,17 @@ const claInflated = inflate(claFlat);
 // Merge the user options into the Options instance
 options.merge(config, claInflated);
 ```
+
+### Die Hard Mode
+
+Error checking is turned off in dieHard mode to significantly improve performance in production environments.
+
+You may want to enable this when NODE_ENV is set to 'production'.
+
+~~~javascript
+const isProd = Boolean(process.env.NODE_ENV === 'production');
+const options = new Options(schema, { dieHard: isProd });
+~~~
 
 <a name="bugs"></a>
 

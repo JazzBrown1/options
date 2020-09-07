@@ -1,7 +1,6 @@
 import merge from './merge';
 import build from './build';
 import { flatMap } from './flatMap';
-import { inflate } from './inflate';
 
 const Options = function (schema, ops = {}) {
   build(schema, ops.dieHard || ops.dieHardBuild, this);

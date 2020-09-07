@@ -23,7 +23,7 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          assert.equal(err.name, 'SchemaParsingError');
+          assert.equal(err.type, 'SchemaObject');
           done();
         }
       });
@@ -41,7 +41,7 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          assert.equal(err.name, 'SchemaParsingError');
+          assert.equal(err.type, 'SchemaObject');
           done();
         }
       });
@@ -60,7 +60,8 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          assert.equal(err.name, 'SchemaParsingError');
+          console.log(err);
+          assert.equal(err.type, 'SchemaDefault');
           done();
         }
       });
@@ -80,7 +81,7 @@ describe('Errors', function () {
           // eslint-disable-next-line no-unused-vars
           const options = new Options(schema);
         } catch (err) {
-          assert.equal(err.name, 'SchemaParsingError');
+          assert.equal(err.type, 'SchemaDefault');
           done();
         }
       });
@@ -98,7 +99,7 @@ describe('Errors', function () {
         try {
           options.merge({ foo: 'bar' });
         } catch (err) {
-          assert.equal(err.name, 'UnknownPropertyError');
+          assert.equal(err.type, 'UnknownProp');
           done();
         }
       });
@@ -114,7 +115,7 @@ describe('Errors', function () {
         try {
           options.merge({ someOption: 1 });
         } catch (err) {
-          assert.equal(err.name, 'PropertyTypeError');
+          assert.equal(err.type, 'PropType');
           done();
         }
       });
@@ -133,7 +134,7 @@ describe('Errors', function () {
         try {
           options.merge({ parent: 1 });
         } catch (err) {
-          assert.equal(err.name, 'InvalidParentTypeError');
+          assert.equal(err.type, 'ParentType');
           done();
         }
       });
@@ -151,7 +152,7 @@ describe('Errors', function () {
         try {
           options.merge({ option: 'wont parse' });
         } catch (err) {
-          assert.equal(err.name, 'PropertyParsingError');
+          assert.equal(err.type, 'PropParser');
           done();
         }
       });
@@ -168,7 +169,7 @@ describe('Errors', function () {
         try {
           options.merge({ option: 'bar' });
         } catch (err) {
-          assert.equal(err.name, 'EnumError');
+          assert.equal(err.type, 'PropEnum');
           done();
         }
       });

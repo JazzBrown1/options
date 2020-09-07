@@ -1,23 +1,21 @@
-import parseOption from './parseOption';
+import parseInput from './parseInput';
 import { isObj } from './getType';
-import UnknownPropertyError from './errors/UnknownPropertyError';
-import InvalidParentTypeError from './errors/InvalidParentTypeError';
+import OptionsError from './errors/OptionsError';
 
 // first object (input) is not parsed
 const mergeCore = (_schema, _current = {}, _input = {}, dieHard) => {
-  if (!dieHard && !isObj(_input)) throw new TypeError('options.merge() input must be an object');
+  if (!dieHard && !isObj(_input)) throw new OptionsError(_schema, _input, '[Options]', 'MergeType');
   const m = (schema, current, input, path) => {
     Object.keys(input).forEach((key) => {
       const value = input[key];
       const option = schema[key];
       const newPath = [...path, key];
-      if (!option) throw new UnknownPropertyError(value, newPath);
+      if (!option) throw new OptionsError(option, value, newPath, 'UnknownProp');
       if (option._parent) {
-        // if (!current[key]) current[key] = {}; // Currently redundant
-        if (!dieHard && !isObj(value)) throw new InvalidParentTypeError(value, newPath);
+        if (!dieHard && !isObj(value)) throw new OptionsError(option, value, newPath, 'ParentType');
         m(option, current[key], value || {}, newPath);
       } else if (option._property) {
-        if (!dieHard) parseOption(option, value, newPath);
+        if (!dieHard) parseInput(option, value, newPath);
         current[key] = value;
       }
     });

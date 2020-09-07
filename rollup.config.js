@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import cleanup from 'rollup-plugin-cleanup';
+import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
@@ -10,6 +11,20 @@ export default [
     output: [
       {
         file: './dist/main.js',
+        format: 'cjs',
+        name: 'options',
+        esModule: false,
+      }
+    ]
+  },
+  {
+    input: 'src/index.js',
+    plugins: [
+      babel(), cleanup(), terser()
+    ],
+    output: [
+      {
+        file: './dist/options.min.js',
         format: 'cjs',
         name: 'options',
         esModule: false,

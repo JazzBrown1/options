@@ -1,6 +1,6 @@
 # EZ-Options
 
-Complex Options Objects made easy with built input checking and meaningful detailed Errors.
+Complex Options Objects made easy with input checking and meaningful errors.
 
 ![NPM](https://img.shields.io/github/last-commit/JazzBrown1/options)
 ![NPM](https://img.shields.io/npm/v/ez-options)

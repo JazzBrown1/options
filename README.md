@@ -2,12 +2,12 @@
 
 Complex Options Objects made easy with input checking and meaningful errors.
 
-![Travis (.com)](https://img.shields.io/travis/com/JazzBrown1/options)
-![Coveralls github branch](https://img.shields.io/coveralls/github/JazzBrown1/options/master)
-![NPM](https://img.shields.io/npm/l/ez-options)
-![npm](https://img.shields.io/npm/v/ez-options)
-![GitHub last commit](https://img.shields.io/github/last-commit/JazzBrown1/options)
-![npm bundle size](https://img.shields.io/bundlephobia/min/ez-options)
+[![npm package][npm-image]][npm-url] 
+[![Travis (.com)](travis-image)][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url] 
+[![Dependencies Status][david-image]][david-url]
+[![GitHub last commit](https://img.shields.io/github/last-commit/JazzBrown1/options.svg)](http://github.com/JazzBrown1/options)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/ez-options)](http://npmjs.com/ez-options)
 
 ### Table of contents
 
@@ -151,3 +151,12 @@ const options = new Options(schema, { dieHard: isProd });
 ## Issues
 
 If you encounter any issues please report them on the Library's [Github](https://github.com/JazzBrown1/options/issues).
+
+[npm-image]:https://img.shields.io/npm/v/ez-options.svg
+[npm-url]:http://npmjs.org/package/ez-options
+[travis-image]:https://img.shields.io/travis/com/JazzBrown1/options.svg
+[travis-url]:https://travis-ci.com/JazzBrown1/options
+[david-image]:https://david-dm.org/JazzBrown1/options/status.svg
+[david-url]:https://david-dm.org/JazzBrown1/options
+[coveralls-image]:https://coveralls.io/repos/github/JazzBrown1/options/badge.svg?branch=master
+[coveralls-url]:https://coveralls.io/github/JazzBrown1/options?branch=master

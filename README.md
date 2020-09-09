@@ -3,11 +3,11 @@
 Complex Options Objects made easy with input checking and meaningful errors.
 
 [![npm package][npm-image]][npm-url] 
-[![Travis (.com)](travis-image)][travis-url]
+[![Travis (.com)][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url] 
 [![Dependencies Status][david-image]][david-url]
 [![GitHub last commit](https://img.shields.io/github/last-commit/JazzBrown1/options.svg)](http://github.com/JazzBrown1/options)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/ez-options)](http://npmjs.com/ez-options)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/ez-options.svg)](http://npmjs.com/ez-options)
 
 ### Table of contents
 

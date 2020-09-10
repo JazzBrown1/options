@@ -119,13 +119,13 @@ describe('Options()', function () {
         name: {
           _property,
           types: ['object', 'string'],
-          parser: (input) => (typeof input === 'string' ? input : `${input.first} ${input.last}`)
+          parser: JSON.parse
         }
       };
       const options = new Options(schema);
       assert.equal(options.name, undefined);
-      options.merge({ name: { first: 'John', last: 'Smith' } });
-      assert.equal(options.name, 'John Smith');
+      options.merge({ name: '{ "first": "John", "last": "Smith" }' });
+      assert.deepEqual(options.name, { first: 'John', last: 'Smith' });
     });
   });
 });

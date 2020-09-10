@@ -1,4 +1,4 @@
-import parseInput from './parseInput';
+import checkInput from './checkInput';
 import { isObj } from './getType';
 import OptionsError from './errors/OptionsError';
 
@@ -16,8 +16,8 @@ const mergeCore = (_schema, _current, _input, dieHard) => {
         if (!dieHard && !isObj(value)) throw new OptionsError(option, value, newPath, 'ParentType');
         m(option, current[key], value, newPath);
       } else {
-        if (!dieHard) parseInput(option, value, newPath);
-        current[key] = value;
+        if (!dieHard) checkInput(option, value, newPath);
+        current[key] = option.parser ? option.parser(value) : value;
       }
     });
     return current;

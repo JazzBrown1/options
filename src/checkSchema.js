@@ -1,6 +1,6 @@
 import { isObj } from './getType';
 import OptionsError from './errors/OptionsError';
-import parseInput from './parseInput';
+import checkInput from './checkInput';
 
 export default (option, path) => {
   if (!isObj(option)) throw new OptionsError(option, undefined, path, 'SchemaObject');
@@ -9,5 +9,5 @@ export default (option, path) => {
   if (option.types && !Array.isArray(option.types)) throw new OptionsError(option, undefined, path, 'SchemaTypes');
   if (option.enum && !Array.isArray(option.enum)) throw new OptionsError(option, undefined, path, 'SchemaEnum');
   if (option.checker && typeof option.checker !== 'function') throw new OptionsError(option, undefined, path, 'SchemaChecker');
-  if (option.default) try { parseInput(option, option.default, path); } catch (err) { throw new OptionsError(option, undefined, path, 'SchemaDefault'); }
+  if (option.default) try { checkInput(option, option.default, path); } catch (err) { throw new OptionsError(option, undefined, path, 'SchemaDefault'); }
 };

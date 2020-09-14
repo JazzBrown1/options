@@ -142,7 +142,7 @@ Error checking is turned off in dieHard mode to significantly improve performanc
 You may want to enable this when NODE_ENV is set to 'production'.
 
 ~~~javascript
-const isProd = Boolean(process.env.NODE_ENV === 'production');
+const isProd = process.env.NODE_ENV === 'production';
 const options = new Options(schema, { dieHard: isProd });
 ~~~
 
